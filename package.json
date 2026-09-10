@@ -1,0 +1,25 @@
+{
+  "name": "vela-dashboard",
+  "version": "1.0.0",
+  "description": "Vela Portfolio OS — modern dark dashboard powered by ProvChart pure CSS charts + st-core design tokens",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "proxy": "node api/proxy-server.js"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  },
+  "dependencies": {},
+  "keywords": [
+    "dashboard",
+    "provchart",
+    "fscss",
+    "portfolio",
+    "css-charts"
+  ],
+  "author": "Figsh Digital",
+  "license": "MIT"
+}
