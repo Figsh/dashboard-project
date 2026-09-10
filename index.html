@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vela — Portfolio OS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="/src/styles/dashboard.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ─── Sidebar ───────────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-mark">V</div>
+        <div class="sidebar-logo-name">
+          Vela
+          <span>Portfolio OS</span>
+        </div>
+      </div>
+
+      <div class="nav-label">Overview</div>
+      <div class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</div>
+      <div class="nav-item"><i class="fas fa-chart-line"></i> Analytics <span class="badge">3</span></div>
+      <div class="nav-item"><i class="fas fa-history"></i> History</div>
+      <div class="nav-item"><i class="fas fa-briefcase"></i> Portfolio</div>
+
+      <div class="nav-label">Assets</div>
+      <div class="nav-item"><i class="fas fa-chart-simple"></i> Markets</div>
+      <div class="nav-item"><i class="far fa-clock"></i> Watchlist</div>
+
+      <div class="nav-label">Account</div>
+      <div class="nav-item"><i class="fas fa-sliders-h"></i> Settings</div>
+
+      <div class="sidebar-footer">
+        <div class="user-row" id="user-row">
+          <div class="user-avatar">PL</div>
+          <div>
+            <div class="user-name">Please</div>
+            <div class="user-role">Figsh Digital</div>
+          </div>
+          <i class="fas fa-chevron-up user-chevron"></i>
+        </div>
+
+        <!-- Profile dropdown -->
+        <div class="profile-dropdown" id="profile-dropdown">
+          <div class="profile-dropdown-item">
+            <i class="fas fa-user"></i> Profile
+          </div>
+          <div class="profile-dropdown-item">
+            <i class="fas fa-cog"></i> Account settings
+          </div>
+          <div class="profile-dropdown-item">
+            <i class="fas fa-bell"></i> Notifications
+          </div>
+          <div class="profile-dropdown-item">
+            <i class="fas fa-credit-card"></i> Billing
+          </div>
+          <div class="profile-dropdown-divider"></div>
+          <div class="profile-dropdown-item">
+            <i class="fas fa-moon"></i> Appearance
+          </div>
+          <div class="profile-dropdown-item">
+            <i class="fas fa-question-circle"></i> Help & support
+          </div>
+          <div class="profile-dropdown-divider"></div>
+          <div class="profile-dropdown-item danger">
+            <i class="fas fa-sign-out-alt"></i> Sign out
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── Main ──────────────────────────────────────────── -->
+    <main class="main">
+
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="topbar-title">
+          <h1>Dashboard</h1>
+          <p id="live-date">Loading…</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="live-badge">
+            <div class="live-pulse"></div>
+            LIVE
+          </div>
+          <div class="period-tabs" id="period-tabs">
+            <div class="period-tab" data-period="1d">1D</div>
+            <div class="period-tab active" data-period="1w">1W</div>
+            <div class="period-tab" data-period="1m">1M</div>
+            <div class="period-tab" data-period="3m">3M</div>
+            <div class="period-tab" data-period="1y">1Y</div>
+          </div>
+          <button class="btn btn-ghost">
+            <i class="fas fa-download"></i> Export
+          </button>
+          <button class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Add Asset
+          </button>
+        </div>
+      </div>
+
+      <!-- Overview stats strip -->
+      <div class="stats-strip">
+        <div class="stat-pill">
+          <div class="stat-pill-icon"><i class="fas fa-layer-group"></i></div>
+          <div>
+            <div class="stat-pill-label">Assets</div>
+            <div class="stat-pill-value">47</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon"><i class="fas fa-exchange-alt"></i></div>
+          <div>
+            <div class="stat-pill-label">Trades (30d)</div>
+            <div class="stat-pill-value">128</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon"><i class="fas fa-percentage"></i></div>
+          <div>
+            <div class="stat-pill-label">Avg. Return</div>
+            <div class="stat-pill-value">+4.8%</div>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon"><i class="fas fa-shield-alt"></i></div>
+          <div>
+            <div class="stat-pill-label">Risk Score</div>
+            <div class="stat-pill-value">Low</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Row -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-label">Portfolio Value</div>
+            <div class="kpi-icon"><i class="fas fa-wallet"></i></div>
+          </div>
+          <div class="kpi-value" id="kpi-total">$84,201</div>
+          <div class="kpi-delta up" id="kpi-total-delta">
+            ▲ +12.4% <span class="kpi-sub">vs last week</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-label">Today's P&amp;L</div>
+            <div class="kpi-icon"><i class="fas fa-chart-line"></i></div>
+          </div>
+          <div class="kpi-value" id="kpi-pnl">+$1,842</div>
+          <div class="kpi-delta up" id="kpi-pnl-delta">
+            ▲ +2.24% <span class="kpi-sub">today</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-label">Open Positions</div>
+            <div class="kpi-icon"><i class="fas fa-unlock-alt"></i></div>
+          </div>
+          <div class="kpi-value" id="kpi-positions">14</div>
+          <div class="kpi-delta up">
+            ▲ +3 <span class="kpi-sub">since yesterday</span>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-label">Win Rate</div>
+            <div class="kpi-icon"><i class="fas fa-bullseye"></i></div>
+          </div>
+          <div class="kpi-value" id="kpi-winrate">68.2%</div>
+          <div class="kpi-delta down">
+            ▼ −1.4% <span class="kpi-sub">30-day avg</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main grid: chart + right panel -->
+      <div class="grid-main">
+
+        <!-- Chart card (ProvChart host) -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-card-title">Portfolio Performance</div>
+              <div class="chart-card-sub" id="chart-range-label">Aug 12 – Aug 18, 2025</div>
+            </div>
+            <div class="legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#6c47ff"></div>
+                Portfolio
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:#00c9b8"></div>
+                Benchmark
+              </div>
+            </div>
+          </div>
+
+          <div class="provchart-host" id="main-chart-host">
+            <div class="pc-loading">Loading chart…</div>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="panel-right">
+          <div class="alloc-card">
+            <div class="alloc-title">
+              <i class="fas fa-chart-pie"></i> Allocation
+            </div>
+            <div id="alloc-list"></div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-title">
+              <i class="fas fa-wave-square"></i> Recent Activity
+            </div>
+            <div id="activity-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom: sparkline cards -->
+      <div class="grid-bottom">
+        <div class="spark-card">
+          <div class="spark-header">
+            <div>
+              <div class="spark-title">
+                <i class="fab fa-bitcoin" style="color:#f7931a"></i>
+                Bitcoin — BTC/USD
+              </div>
+              <div class="spark-sub">Crypto · Long position</div>
+            </div>
+            <div>
+              <div class="spark-value" id="btc-price">$62,480</div>
+              <div class="spark-delta up" id="btc-delta">▲ +3.2%</div>
+            </div>
+          </div>
+          <div class="spark-chart-host provchart-host" id="spark-btc-host">
+            <div class="pc-loading">…</div>
+          </div>
+        </div>
+
+        <div class="spark-card">
+          <div class="spark-header">
+            <div>
+              <div class="spark-title">
+                <i class="fab fa-ethereum" style="color:#627eea"></i>
+                Ethereum — ETH/USD
+              </div>
+              <div class="spark-sub">Crypto · Long position</div>
+            </div>
+            <div>
+              <div class="spark-value" id="eth-price">$2,690</div>
+              <div class="spark-delta down" id="eth-delta">▼ −0.8%</div>
+            </div>
+          </div>
+          <div class="spark-chart-host provchart-host" id="spark-eth-host">
+            <div class="pc-loading">…</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
