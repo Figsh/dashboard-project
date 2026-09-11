@@ -1,3 +1,4 @@
+
 @import './tokens.css';
 
 /* ─── reset / base ────────────────────────────────────── */
@@ -536,19 +537,25 @@ html, body {
   flex-shrink: 0;
 }
 
-/* ProvChart host */
+/* ProvChart host — fixed box so injected chart has a paint surface */
 .provchart-host {
   width: 100%;
-  min-height: 260px;
+  height: 280px;
+  min-height: 280px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .provchart-host .pc-loading {
   color: var(--st-muted);
   font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .provchart-host .pc-error {
@@ -559,10 +566,7 @@ html, body {
   line-height: 1.5;
 }
 
-/* Injected ProvChart CSS lives in a style tag; scope tweaks */
-.provchart-host [data-provchart] {
-  width: 100% !important;
-}
+
 
 /* ─── right panel ─────────────────────────────────────── */
 .panel-right {
@@ -736,9 +740,12 @@ html, body {
 .spark-delta.up   { color: var(--st-green); }
 .spark-delta.down { color: var(--st-red); }
 
-.spark-chart-host {
-  min-height: 90px;
+.spark-chart-host,
+.spark-chart-host.provchart-host {
   width: 100%;
+  min-height: 120px;
+  height: 120px;
+  overflow: hidden;
 }
 
 /* ─── overview stats strip ────────────────────────────── */
@@ -807,3 +814,5 @@ html, body {
   .topbar { align-items: flex-start; flex-direction: column; }
   .topbar-actions { flex-wrap: wrap; }
 }
+
+
