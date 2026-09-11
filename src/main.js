@@ -1,14 +1,13 @@
 /**
  * Vela Dashboard — ProvChart powered
  * Charts are generated via the ProvChart API (proxy) so we are no longer
- * limited to the 8-point st-core constraint.
+ * limited to the old 8-point st-core constraint.
  */
 
 import { DATASETS, ALLOCATION, ACTIVITY } from './data.js';
 
 /* ─── state ──────────────────────────────────────────── */
 let currentPeriod = '1w';
-let chartStyleEl = null; // holds the latest ProvChart CSS
 
 /* ─── helpers ────────────────────────────────────────── */
 function $(sel, root = document) {
@@ -68,37 +67,58 @@ async function generateChart(payload) {
 
 /**
  * Inject ProvChart result into a host element.
- * Reuses a single <style id="provchart-styles"> for the page.
+ * Each host gets its own <style> so charts never clobber each other.
  */
 function mountChart(hostEl, { html, css }) {
   if (!hostEl) return;
 
-  // Ensure global style tag exists
-  if (!chartStyleEl) {
-    chartStyleEl = document.createElement('style');
-    chartStyleEl.id = 'provchart-styles';
-    document.head.appendChild(chartStyleEl);
+  // Remove previous style for this host
+  if (hostEl._pcStyle) {
+    hostEl._pcStyle.remove();
+    hostEl._pcStyle = null;
   }
-  // Append / replace CSS (ProvChart scopes classes, so safe to overwrite)
-  chartStyleEl.textContent = css;
+
+  // Scoped style tag per chart instance
+  const style = document.createElement('style');
+  style.setAttribute('data-provchart-host', hostEl.id || 'anon');
+  style.textContent = css;
+  document.head.appendChild(style);
+  hostEl._pcStyle = style;
 
   hostEl.innerHTML = html;
 
-  // Optional runtime refresh if you later load provchart-runtime
+  // Force injected root + first-level wrappers to fill the host box.
+  // ProvChart often emits fixed pixel sizes from the payload width/height;
+  // we override so the chart scales to the card.
+  const root =
+    hostEl.querySelector('[data-provchart]') || hostEl.firstElementChild;
+  if (root) {
+    root.style.setProperty('width', '100%', 'important');
+    root.style.setProperty('max-width', '100%', 'important');
+    root.style.setProperty('min-height', '100%', 'important');
+    root.style.setProperty('box-sizing', 'border-box', 'important');
+  }
+
+  // Also stretch any direct SVG if present
+  hostEl.querySelectorAll('svg').forEach((svg) => {
+    svg.setAttribute('width', '100%');
+    svg.style.maxWidth = '100%';
+    svg.style.height = 'auto';
+  });
+
   if (window.ProvChartRuntime?.refresh) {
     window.ProvChartRuntime.refresh();
   }
 }
 
 /**
- * Build a multi-series line payload matching the current design tokens.
+ * Build a multi-series area payload — pass labels/points as-is (9 points).
  */
 function buildMainPayload(period) {
   const d = DATASETS[period];
   return {
-    type: 'line',
+    type: 'area',
     theme: 'midnight',
-    width: 720,
     height: 260,
     axisX: d.labels,
     series: [
@@ -122,14 +142,13 @@ function buildSparkPayload(points, color, labels) {
   return {
     type: 'area',
     theme: 'midnight',
-    width: 360,
-    height: 90,
-    axisX: labels.slice(-8), // sparklines stay compact
+    height: 100,
+    axisX: labels,
     series: [
       {
         name: 'Price',
         color,
-        points: points.slice(-8),
+        points,
       },
     ],
     legend: false,
@@ -144,9 +163,14 @@ async function renderPeriodCharts(period) {
   const btcHost = document.getElementById('spark-btc-host');
   const ethHost = document.getElementById('spark-eth-host');
 
-  // Loading states
+  // Loading states + clear previous scoped styles
   [mainHost, btcHost, ethHost].forEach((h) => {
-    if (h) h.innerHTML = '<div class="pc-loading">Generating chart…</div>';
+    if (!h) return;
+    if (h._pcStyle) {
+      h._pcStyle.remove();
+      h._pcStyle = null;
+    }
+    h.innerHTML = '<div class="pc-loading">Generating chart…</div>';
   });
 
   try {
