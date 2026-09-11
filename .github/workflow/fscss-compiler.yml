@@ -1,0 +1,38 @@
+name: Compile FSCSS
+
+on:
+  push:
+    paths:
+      - "**.fscss"
+
+permissions:
+  contents: write
+
+jobs:
+  build-css:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile FSCSS
+        run: npx fscss fscss/st-tokens.fscss src/styles/tokens.css
+
+      - name: Commit compiled CSS
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add src/styles/tokens.css
+          git commit -m "Auto compile FSCSS" || echo "No changes"
+          git push
