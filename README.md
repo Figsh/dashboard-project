@@ -26,7 +26,7 @@ Modern dark portfolio dashboard powered by **[ProvChart](https://chart.devtem.or
 
 ```bash
 # 1. Clone & install
-git clone https://github.com/YOUR_USER/vela-dashboard.git
+git clone https://github.com/Figsh/vela-dashboard.git
 cd vela-dashboard
 npm install
 
