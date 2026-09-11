@@ -1,0 +1,19 @@
+/* ─── Design tokens (kept from original st-core theme) ─── */
+:root {
+  --st-bg:       #080710;
+  --st-surface:  #0f0e1c;
+  --st-card:     #13122a;
+  --st-accent:   #6c47ff;
+  --st-accent-2: #a78bff;
+  --st-accent-dim: #2a1f6e;
+  --st-green:    #00e5a0;
+  --st-red:      #ff4d6a;
+  --st-text:     #edeaff;
+  --st-muted:    #5e5a82;
+  --st-border:   rgba(108, 71, 255, 0.13);
+
+  --font-display: 'DM Mono', monospace;
+  --font-body:    'Outfit', sans-serif;
+  --glow-accent:  0 0 40px rgba(108, 71, 255, 0.18);
+  --glow-card:    0 8px 40px rgba(0, 0, 0, 0.5);
+}
