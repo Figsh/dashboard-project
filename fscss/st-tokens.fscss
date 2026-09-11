@@ -1,5 +1,6 @@
-@import((st-root) from st-core)
-@st-root()
+@import((st-root as root) from st-core)
+@root()
+
 /* resets */
 /* ─── Design tokens (kept from original st-core theme) ─── */
 :root {
