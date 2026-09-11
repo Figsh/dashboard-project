@@ -1,19 +1,56 @@
+:root{
+/* colors */
+--st-bg: #0e0d14;
+--st-surface: #161422;
+--st-card: #1c1a2e;
+--st-accent: #9d7eff;
+--st-accent-2: #c4a8ff;
+--st-accent-dim: #3a2e6e;
+--st-green: #4fffb0;
+--st-red: #ff5e7d;
+--st-text: #e8e3ff;
+--st-muted: #6b6488;
+--st-border: rgba(157,126,255,.15);
+/* radius */
+--st-radius-xl: 40px;
+--st-radius-lg: 16px;
+--st-radius-md: 12px;
+--st-radius-sm: 10px;
+/* spacing */
+--st-pad: 24px;
+/* chart points (Y values only) */
+--st-p1: 68%;
+--st-p2: 59%;
+--st-p3: 70%;
+--st-p4: 35%;
+--st-p5: 58%;
+--st-p6: 22%;
+--st-p7: 42%;
+--st-p8: 55%;
+--st-peak-x: 71%;
+--st-peak-y: var(--st-p6);
+/* range */
+--st-cat-bar-fill-range: 0;
+/* line with */
+--st-chart-line-width: 1.5px;
+}
+
+/* resets */
 /* ─── Design tokens (kept from original st-core theme) ─── */
 :root {
-  --st-bg:       #080710;
-  --st-surface:  #0f0e1c;
-  --st-card:     #13122a;
-  --st-accent:   #6c47ff;
-  --st-accent-2: #a78bff;
-  --st-accent-dim: #2a1f6e;
-  --st-green:    #00e5a0;
-  --st-red:      #ff4d6a;
-  --st-text:     #edeaff;
-  --st-muted:    #5e5a82;
-  --st-border:   rgba(108, 71, 255, 0.13);
-
-  --font-display: 'DM Mono', monospace;
-  --font-body:    'Outfit', sans-serif;
-  --glow-accent:  0 0 40px rgba(108, 71, 255, 0.18);
-  --glow-card:    0 8px 40px rgba(0, 0, 0, 0.5);
+--st-bg:       #080710;
+--st-surface:  #0f0e1c;
+--st-card:     #13122a;
+--st-accent:   #6c47ff;
+--st-accent-2: #a78bff;
+--st-accent-dim: #2a1f6e;
+--st-green:    #00e5a0;
+--st-red:      #ff4d6a;
+--st-text:     #edeaff;
+--st-muted:    #5e5a82;
+--st-border:   rgba(108, 71, 255, 0.13);
+--font-display: 'DM Mono', monospace;
+--font-body:    'Outfit', sans-serif;
+--glow-accent:  0 0 40px rgba(108, 71, 255, 0.18);
+--glow-card:    0 8px 40px rgba(0, 0, 0, 0.5);
 }
